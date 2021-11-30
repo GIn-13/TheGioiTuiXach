@@ -588,7 +588,7 @@ span.next {
 #li-product {
 	margin-top: 2px;
 	list-style-type: none;
-	width: 23%;
+	width: 270px;
 	height: 380px;
 	float: left;
 	position: relative;
@@ -664,6 +664,7 @@ div.add_cart p {
 
 
 #product-with-banner {
+	background: red;
 	width: 1200px;
 	height: auto;
 	margin: 0px auto;
@@ -680,7 +681,7 @@ div.add_cart p {
 }
 #category-banner img{
 	width: 238px;
-	height: 604px;
+	height: 740px;
 }
 
 

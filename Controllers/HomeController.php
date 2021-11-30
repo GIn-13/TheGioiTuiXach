@@ -22,13 +22,11 @@ class HomeController extends BaseController
 		
 		$categories=$this->categoryModel->getAll();
 		$brands=$this->brandModel->getAll();
-		$products=$this->productModel->getByBrandId(1,['column'=>'id','type'=> 'ASC']);
-		$products2=$this->productModel->getByBrandId(3,['column'=>'id','type'=> 'ASC']);
+		$products=$this->productModel->getAll();
 		return $this->view('frontend.homes.index',[
 				'categories'=> $categories,
 				'brands'=> $brands,
 				'products'=> $products,
-				'products2'=> $products2,
 			]);
 	}
 	

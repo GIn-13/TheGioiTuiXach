@@ -35,7 +35,7 @@ $categoryId =$_GET['id'] ?? null;
 				<li><a href="" class="res">Đăng kí</a></li>
 				<li><a href="" class="login">Đăng nhập</a></li>
 				<li>
-					<a href="http://localhost/TheGioiTuiXach/index.php?controller=cart" class="cart">Giỏ hàng</a>
+					<a href="index.php?controller=cart" class="cart">Giỏ hàng</a>
 					<span class="total">0</span>
 				</li>
 			</ul>
@@ -77,7 +77,7 @@ $categoryId =$_GET['id'] ?? null;
 		<div id="banner-main">
 			<div id="menu">
 				<ul class="root">			
-					<li ><a href="http://localhost/TheGioiTuiXach" class="root-Trang-chu">Trang chủ</a></li>
+					<li ><a href="index.php" class="root-Trang-chu">Trang chủ</a></li>
 					<li><a href="">Giới thiệu</a></li>
 					<li><a href="">Tin tức</a></li>
 					<li><a href="?controller=category&action=show&id=<?php echo $allCategory; ?>">Sản phẩm</a>

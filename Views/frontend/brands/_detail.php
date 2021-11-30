@@ -72,7 +72,7 @@
 		<div id="banner-main">
 			<div id="menu">
 				<ul class="root">			
-					<li ><a href="http://localhost/TheGioiTuiXach" class="root-Trang-chu">Trang chủ</a></li>
+					<li ><a href="index.php" class="root-Trang-chu">Trang chủ</a></li>
 					<li><a href="">Giới thiệu</a></li>
 					<li><a href="">Tin tức</a></li>
 					<li><a href="?controller=category&action=show&id=<?php echo $allCategory;?>">Sản phẩm</a>

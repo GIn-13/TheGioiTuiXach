@@ -71,7 +71,7 @@
 		<div id="banner-main">
 			<div id="menu">
 				<ul class="root">			
-					<li ><a href="http://localhost/TheGioiTuiXach" class="root-Trang-chu">Trang chủ</a></li>
+					<li ><a href="index.php" class="root-Trang-chu">Trang chủ</a></li>
 					<li><a href="">Giới thiệu</a></li>
 					<li><a href="">Tin tức</a></li>
 					<li><a href="?controller=category&action=show&id=<?php echo $allCategory;?>">Sản phẩm</a>
@@ -113,7 +113,7 @@
 	<div id="cart-list">
 		<table width="100%" border="1" cellpadding="0" cellspacing="0" style="margin-top: 20px;">
 			<tr style="height: 60px;">
-				<td>ID</td>
+				
 				<td>Tên sản phẩm</td>				
 				<td>Hình ảnh</td>
 				<td>Giá bán</td>
@@ -124,9 +124,7 @@
 			<?php foreach ($products as $product):
 				
 			?>
-			<tr>
-
-				<td><?= $product[0]['id'] ?></td>
+			<tr>				
 				<td><?= $product[0]['name'] ?></td>				
 				<td><img style=" height: 75px;" src="<?= $product[0]['image'] ?> (1).jpg"	alt=""></td>
 				<td><?= number_format($product[0]['price'],0) ?></td>

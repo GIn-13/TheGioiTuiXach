@@ -35,7 +35,7 @@
 				<li><a href="" class="res">Đăng kí</a></li>
 				<li><a href="" class="login">Đăng nhập</a></li>
 				<li>
-					<a href="http://localhost/TheGioiTuiXach/index.php?controller=cart" class="cart">Giỏ hàng</a>
+					<a href="?controller=cart" class="cart">Giỏ hàng</a>
 					<span class="total">0</span>
 				</li>
 			</ul>
@@ -75,7 +75,7 @@
 		<div id="banner-main">
 			<div id="menu">
 				<ul class="root">			
-					<li ><a href="http://localhost/TheGioiTuiXach" class="root-Trang-chu">Trang chủ</a></li>
+					<li ><a href="index.php" class="root-Trang-chu">Trang chủ</a></li>
 					<li><a href="">Giới thiệu</a></li>
 					<li><a href="">Tin tức</a></li>
 					<li><a href="?controller=category&action=show&id=<?php echo $allCategory ?>">Sản phẩm</a>
@@ -105,14 +105,85 @@
 
 
 
-			<div class="slider">
-				<ul>
-					<li><img src="./Public/images/slider-img1.png" alt=""></li>
-					<li><img src="./Public/images/slider-img2.png" alt=""></li>
-				</ul>
-				<span class="prev"><</span>
-				<span class="next">></span>
-			</div>
+
+			<style >
+		
+		.slider {
+			position: relative;
+			background: #ccc;
+			height: 270px;
+			width: 900px;
+		}
+
+		.slider img {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+		}
+		
+		.slider a {
+			display: block;
+			width: 60px;
+			height: 45px;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 1000;
+			text-decoration: none;
+			text-align: center;
+			color: #fff;
+			line-height: 45px;
+		}
+
+		.next{
+			position: absolute;
+			right: 0px;
+			top: 220px;
+		}
+
+		.prev{
+			position: absolute;
+			left: 0px;
+			top: 220px;
+		}
+	</style>
+	<div class="slider">
+		<img src="./Public/images/slider-img1.png" class="slide-item" number="0">
+		<img src="./Public/images/slider-img2.png" class="slide-item" number="1" style="display: none;">
+
+		<a href="#" class="next">>></a>
+		<a href="#" class="prev"><<</a>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(() => {			
+			$('.next').click(function(){
+				changeImage('next');
+			})
+			$('.prev').click(function(){
+				changeImage('prev');
+			})
+		})
+
+		function changeImage(type){
+			let imgSelectVisible = $('img.slide-item:visible');
+			let imgVisible = parseInt(imgSelectVisible.attr('number'));
+			let eqNumber = type === 'next'? imgVisible + 1 : imgVisible -1;
+
+			if(imgVisible === 0) {
+				eqNumber = $('.slide-item').length -1;
+			}
+
+			if(eqNumber >= $('.slide-item').length) {
+				eqNumber = 0;
+			}
+			$('img.slide-item').eq(eqNumber).fadeIn();
+
+			imgSelectVisible.fadeOut();						
+		}
+
+		setInterval(function(){
+			$('.next').click();
+		},4000)
+	</script>
 			
 		</div>
 				
@@ -120,16 +191,20 @@
 			<h3>SẢN PHẨM MỚI</h3>
 			<ul>					
 				<li>
+					<?php  for($i=2;$i<=2;$i++) { ?>
 					<div class="new-product-item">
-						<img src="./Public/images/new1.png" alt="">
-						<p>Túi lưới thời trang đa dụng</p>
-						<h4>299.000</h4>
+						<img src="<?php print_r($products[$i]['image'])  ?> (1).jpg" alt="">
+						<p><a style="text-decoration: none;color: #000;"  href="?controller=product&action=show&id=<?php print_r($products[$i]['id'])  ?>"><?php print_r($products[$i]['name'])?></a></p>
+						<h4><?php print_r(number_format(($products[$i]['price']),0,'.','.'))?>đ</h4>
 					</div>
+					<?php }?>
+					<?php  for($i=10;$i<=10;$i++) { ?>
 					<div class="new-product-item">
-						<img src="./Public/images/new2.png" alt="">
-						<p>Túi da thời trang </p>
-						<h4>299.000</h4>
+						<img src="<?php print_r($products[$i]['image'])  ?> (1).jpg" alt="">
+						<p><a style="text-decoration: none;color: #000;" href="?controller=product&action=show&id=<?php print_r($products[$i]['id'])  ?>"><?php print_r($products[$i]['name'])?></a></p>
+						<h4><?php print_r(number_format(($products[$i]['price']),0,'.','.'))?>đ</h4>
 					</div>
+					<?php }?>
 				</li>
 			</ul>		
 		</div>
@@ -181,12 +256,12 @@
 		
 		<div id="product">
 			
-			<?php  foreach ($products as $product):  ?>
-			<li id="li-product">
-				<div id="product-item">
+			<?php  for($i=1;$i<=8;$i++) { ?>
+				<li id="li-product" >
+				<div id="product-item" >
 					<div id="outlook-item">
-						<img class="pro-img" src="<?php print_r($product['image'])  ?> (1).jpg" alt="">
-						<a href="index.php?controller=cart&action=store&id=<?php print_r($product['id'])  ?>" class="hide-add">
+						<img class="pro-img" src="<?php print_r($products[$i]['image'])  ?> (1).jpg" alt="">
+						<a href="index.php?controller=cart&action=store&id=<?php print_r($products[$i]['id'])  ?>" class="hide-add">
 							<div class="add_cart">
 								<p>Thêm vào giỏ hàng</p>
 								<img src="./Public/images/cart-add.png" alt="" style="width: 30px; height: 30px; position: absolute; top: 0px; left: 15px;">
@@ -195,12 +270,12 @@
 						</a>
 					</div>
 					<div id="info-item">
-						<a href="?controller=product&action=show&id=<?php print_r($product['id'])  ?>"><?php print_r($product['name'])?></a>
-						<p><?php print_r(number_format(($product['price']),0,'.','.'))?>đ</p>
+						<a href="?controller=product&action=show&id=<?php print_r($products[$i]['id'])  ?>"><?php print_r($products[$i]['name'])?></a>
+						<p><?php print_r(number_format(($products[$i]['price']),0,'.','.'))?>đ</p>
 					</div>
 				</div>
 			</li>
-			<?php endforeach;?>
+			<?php } ?>
 			
 		</div>
 
@@ -226,12 +301,12 @@
 		
 		<div id="product">
 			
-			<?php  foreach ($products2 as $product):  ?>
-			<li id="li-product">
-				<div id="product-item">
+			<?php  for($i=10;$i<=17;$i++) { ?>
+				<li id="li-product" >
+				<div id="product-item" >
 					<div id="outlook-item">
-						<img class="pro-img" src="<?php print_r($product['image'])  ?> (1).jpg" alt="">
-						<a href="index.php?controller=cart&action=store&id=<?php print_r($product['id'])  ?>" class="hide-add">
+						<img class="pro-img" src="<?php print_r($products[$i]['image'])  ?> (1).jpg" alt="">
+						<a href="index.php?controller=cart&action=store&id=<?php print_r($products[$i]['id'])  ?>" class="hide-add">
 							<div class="add_cart">
 								<p>Thêm vào giỏ hàng</p>
 								<img src="./Public/images/cart-add.png" alt="" style="width: 30px; height: 30px; position: absolute; top: 0px; left: 15px;">
@@ -240,12 +315,12 @@
 						</a>
 					</div>
 					<div id="info-item">
-						<a href="?controller=product&action=show&id=<?php print_r($product['id'])  ?>"><?php print_r($product['name'])?></a>
-						<p><?php print_r(number_format(($product['price']),0,'.','.'))?>đ</p>
+						<a href="?controller=product&action=show&id=<?php print_r($products[$i]['id'])  ?>"><?php print_r($products[$i]['name'])?></a>
+						<p><?php print_r(number_format(($products[$i]['price']),0,'.','.'))?>đ</p>
 					</div>
 				</div>
 			</li>
-			<?php endforeach;?>
+			<?php } ?>
 
 		</div> 
 	</div>
@@ -263,21 +338,38 @@
 					<li><h5>BALO LAPTOP</h5></li>
 					<li class="last-item"><h5>BALO THỜI TRANG</h5></li>
 				</ul>
+			
 				
 			</div>
+
 		</div>
 
 		
 		<div id="product-with-banner">
 			<div id="category-banner">
-				<img src="./Public/images/category-banner1.png" alt="">
-			</div>	
-			
-			
-		</div> 
-		<div id="product-item">
-				
+				<img src="./Public/images/category-banner1.png" style="margin-top: -10px;" alt="">
 			</div>
+			<?php  for($i=1;$i<=6;$i++) { ?>
+				<li id="li-product" >
+				<div id="product-item" >
+					<div id="outlook-item">
+						<img class="pro-img" src="<?php print_r($products[$i]['image'])  ?> (1).jpg" alt="">
+						<a href="index.php?controller=cart&action=store&id=<?php print_r($products[$i]['id'])  ?>" class="hide-add">
+							<div class="add_cart">
+								<p>Thêm vào giỏ hàng</p>
+								<img src="./Public/images/cart-add.png" alt="" style="width: 30px; height: 30px; position: absolute; top: 0px; left: 15px;">
+							
+							</div>
+						</a>
+					</div>
+					<div id="info-item">
+						<a href="?controller=product&action=show&id=<?php print_r($products[$i]['id'])  ?>"><?php print_r($products[$i]['name'])?></a>
+						<p><?php print_r(number_format(($products[$i]['price']),0,'.','.'))?>đ</p>
+					</div>
+				</div>
+			</li>
+			<?php } ?>
+		</div> 
 	</div>
 
 
@@ -299,14 +391,28 @@
 		
 		<div id="product-with-banner">
 			<div id="category-banner">
-				<img src="./Public/images/category-banner2.png" alt="">
-			</div>	
-			
-			
-			
-			<div id="product-item">
-				
+				<img src="./Public/images/category-banner2.png" style="margin-top: -10px;" alt="">
 			</div>
+			<?php  for($i=7;$i<=12;$i++) { ?>
+				<li id="li-product" >
+				<div id="product-item" >
+					<div id="outlook-item">
+						<img class="pro-img" src="<?php print_r($products[$i]['image'])  ?> (1).jpg" alt="">
+						<a href="index.php?controller=cart&action=store&id=<?php print_r($products[$i]['id'])  ?>" class="hide-add">
+							<div class="add_cart">
+								<p>Thêm vào giỏ hàng</p>
+								<img src="./Public/images/cart-add.png" alt="" style="width: 30px; height: 30px; position: absolute; top: 0px; left: 15px;">
+							
+							</div>
+						</a>
+					</div>
+					<div id="info-item">
+						<a href="?controller=product&action=show&id=<?php print_r($products[$i]['id'])  ?>"><?php print_r($products[$i]['name'])?></a>
+						<p><?php print_r(number_format(($products[$i]['price']),0,'.','.'))?>đ</p>
+					</div>
+				</div>
+			</li>
+			<?php } ?>
 		</div> 
 	</div>
 
